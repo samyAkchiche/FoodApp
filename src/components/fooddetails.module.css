@@ -40,3 +40,13 @@
 .recipeInstructions li {
     margin: 10px 0px;
 }
+
+.ingredientsDetails {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.ingredientsSummary {
+    list-style: none;
+}
