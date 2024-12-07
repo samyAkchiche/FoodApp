@@ -50,12 +50,10 @@ export default function FoodDetails({ foodId }) {
                     <span>💲{food.pricePerServing / 100} per Serving</span>
                 </div>
             </div>
-            <details className={styles.ingredientsDetails}>
-                <summary className={styles.ingredientsSummary}>
-                    <h2>Ingredients</h2>
-                </summary>
+            <h2>Ingredients</h2>
+            <div className={styles.ingredientsList}>
                 <IngredientsList food={food} isLoading={isLoading} />
-            </details>
+            </div>
             <h2>Instructions</h2>
             <div className={styles.recipeInstructions}>
                 <ol>

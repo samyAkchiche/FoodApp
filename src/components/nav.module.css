@@ -6,3 +6,13 @@
     padding: 30px;
     box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.5);
 }
+
+.button {
+    float: right;
+    height: 2.5rem;
+    width: 2.5rem;
+    border: none;
+    border-radius: 100%;
+    background-color: #22085e;
+    cursor: pointer;
+}

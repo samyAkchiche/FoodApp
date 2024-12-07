@@ -30,7 +30,7 @@
 .recipeInstructions {
     padding: 0;
     border-radius: 5px;
-    color: #adaab0;
+    color: #919093;
 }
 
 .recipeInstructions ol {
@@ -41,12 +41,6 @@
     margin: 10px 0px;
 }
 
-.ingredientsDetails {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-.ingredientsSummary {
-    list-style: none;
+.ingredientsList {
+    color: #919093;
 }

@@ -1,11 +1,9 @@
-import styles from "./ingredient.module.css";
-
 export default function Ingredient({ item }) {
     return (
-        <div className={styles.container}>
+        <div>
             <ul>
                 <li key={item.id}>
-                    {item.name} {item.amount} {item.unit}
+                    {item.amount} {item.unit} {item.name}
                 </li>
             </ul>
         </div>
