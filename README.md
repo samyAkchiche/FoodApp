@@ -1,3 +1,6 @@
+![FoodApp screenshot](./foodapp-fullScreenShot.png)
+
+
 # About This Project 🚀 
 **FoodApp** is a user-friendly platform designed to help food enthusiasts discover delicious recipes and cooking inspiration. Whether you're looking for a quick meal or exploring new culinary ideas, this app provides an intuitive interface to browse, explore, and get detailed instructions for a wide variety of recipes.
 
