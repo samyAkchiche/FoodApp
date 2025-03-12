@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./fooddetails.module.css";
 import IngredientsList from "./IngredientsList";
 
-export default function FoodDetails({ foodId }) {
+export default function FoodDetails({ foodId, darkMode }) {
     const [food, setFood] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const URL = `https://api.spoonacular.com/recipes/${foodId}/information`;
@@ -20,7 +20,13 @@ export default function FoodDetails({ foodId }) {
     }, [foodId]);
 
     return (
-        <div className={styles.recipeCard}>
+        <div
+            className={styles.recipeCard}
+            style={{
+                color: !darkMode ? "#fff" : "",
+                backgroundColor: !darkMode ? "#282828" : "",
+            }}
+        >
             <div>
                 <h1 className={styles.recipeName}>{food.title}</h1>
                 <img

@@ -4,7 +4,7 @@ import styles from "./search.module.css";
 const URL = "https://api.spoonacular.com/recipes/complexSearch";
 const API_KEY = "59232dbb62804c6d8a4a6c068fc03a8a";
 
-export default function Search({ foodData, setFoodData }) {
+export default function Search({ foodData, setFoodData, darkMode }) {
     const [query, setQuery] = useState("pizza");
 
     useEffect(() => {
@@ -34,6 +34,10 @@ export default function Search({ foodData, setFoodData }) {
         <div className={styles.searchContainer}>
             <input
                 className={styles.input}
+                style={{
+                    backgroundColor: !darkMode ? "#121212" : "",
+                    color: !darkMode ? "#fff" : "",
+                }}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 type="text"
