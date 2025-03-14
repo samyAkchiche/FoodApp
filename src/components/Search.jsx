@@ -4,7 +4,12 @@ import styles from "./search.module.css";
 const URL = "https://api.spoonacular.com/recipes/complexSearch";
 const API_KEY = "59232dbb62804c6d8a4a6c068fc03a8a";
 
-export default function Search({ foodData, setFoodData, darkMode }) {
+export default function Search({
+    setApiError,
+    foodData,
+    setFoodData,
+    darkMode,
+}) {
     const [query, setQuery] = useState("pizza");
 
     useEffect(() => {
@@ -24,6 +29,7 @@ export default function Search({ foodData, setFoodData, darkMode }) {
             } catch (error) {
                 console.error("Failed to fetch data:", error);
                 setFoodData([]);
+                setApiError(true);
             }
         }
 
