@@ -1,3 +1,9 @@
 .parentContainer {
     display: flex;
 }
+
+@media (max-width: 670px) {
+    .parentContainer {
+        flex-direction: column;
+    }
+}

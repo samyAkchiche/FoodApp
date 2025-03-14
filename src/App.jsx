@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Search from "./components/Search";
 import FoodList from "./components/FoodList";
 import Nav from "./components/Nav";
@@ -13,6 +13,15 @@ function App() {
     const [foodId, setFoodId] = useState("656329");
     const [darkMode, setDarkMode] = useState(false);
     const [apiError, setApiError] = useState(false);
+
+    const foodDetailsRef = useRef(null);
+
+    const scrollToFoodDetails = () => {
+        if (foodDetailsRef.current) {
+            foodDetailsRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <div className={darkMode ? "App" : "darkDisplay"}>
             {apiError ? (
@@ -34,14 +43,17 @@ function App() {
                                 setFoodId={setFoodId}
                                 foodData={foodData}
                                 darkMode={darkMode}
+                                scrollToFoodDetails={scrollToFoodDetails}
                             />
                         </InnerContainer>
                         <InnerContainer>
-                            <FoodDetails
-                                setApiError={setApiError}
-                                foodId={foodId}
-                                darkMode={darkMode}
-                            />
+                            <div ref={foodDetailsRef}>
+                                <FoodDetails
+                                    setApiError={setApiError}
+                                    foodId={foodId}
+                                    darkMode={darkMode}
+                                />
+                            </div>
                         </InnerContainer>
                     </Container>
                 </>

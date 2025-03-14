@@ -1,6 +1,11 @@
 import styles from "./fooditem.module.css";
 
-export default function FoodItem({ food, setFoodId, darkMode }) {
+export default function FoodItem({
+    food,
+    setFoodId,
+    darkMode,
+    scrollToFoodDetails,
+}) {
     return (
         <div
             className={styles.itemContainer}
@@ -20,6 +25,7 @@ export default function FoodItem({ food, setFoodId, darkMode }) {
                     onClick={() => {
                         console.log(food.id);
                         setFoodId(food.id);
+                        scrollToFoodDetails();
                     }}
                     className={styles.itemButton}
                 >
