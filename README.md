@@ -16,10 +16,8 @@
 ## Tech Stack 🛠
 
 * React
-* JavaScript
-* CSS
+* Vanilla CSS
 * React-router-dom
-* react-loading-skeleton
 * Spoonacular API
 
 ## API Reference
