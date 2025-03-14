@@ -1,7 +1,7 @@
 html,
 body {
     overflow-x: hidden;
-    width: 100%;
+    width: 100vw;
 }
 
 body {
@@ -11,4 +11,17 @@ body {
 .darkDisplay {
     background-color: #121212;
     color: #fff;
+}
+
+.dialogueOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }

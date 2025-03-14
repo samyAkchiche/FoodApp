@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./fooddetails.module.css";
 import IngredientsList from "./IngredientsList";
 
-export default function FoodDetails({ foodId, darkMode }) {
+export default function FoodDetails({ foodId, darkMode, setApiError }) {
     const [food, setFood] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const URL = `https://api.spoonacular.com/recipes/${foodId}/information`;
@@ -10,11 +10,22 @@ export default function FoodDetails({ foodId, darkMode }) {
 
     useEffect(() => {
         async function fetchFood() {
-            const res = await fetch(`${URL}?apiKey=${API_KEY}`);
-            const data = await res.json();
-            console.log(data);
-            setFood(data);
-            setIsLoading(false);
+            try {
+                const res = await fetch(`${URL}?apiKey=${API_KEY}`);
+                if (!res.ok) {
+                    throw new Error(
+                        `API Error: ${res.status} ${res.statusText}`
+                    );
+                }
+                const data = await res.json();
+                console.log(data);
+                setFood(data);
+            } catch (err) {
+                console.log("Error fetching food details:", err);
+                setApiError(true);
+            } finally {
+                setIsLoading(false);
+            }
         }
         fetchFood();
     }, [foodId]);
@@ -65,10 +76,12 @@ export default function FoodDetails({ foodId, darkMode }) {
                 <ol>
                     {isLoading ? (
                         <p>Loading...</p>
-                    ) : (
+                    ) : food.analyzedInstructions?.[0]?.steps?.length ? (
                         food.analyzedInstructions[0].steps.map((step) => (
                             <li key={step.number}>{step.step}</li>
                         ))
+                    ) : (
+                        <p>No instructions available.</p>
                     )}
                 </ol>
             </div>
