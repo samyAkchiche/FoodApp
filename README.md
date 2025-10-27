@@ -20,6 +20,10 @@
 * React-router-dom
 * Spoonacular API
 
+## Live Demo 🎥
+
+Check out the app here 👉 **[FoodApp]([https://onepiece-quiz-2022.web.app/](https://samy-foodapp.netlify.app/))**
+
 ## API Reference
 
 #### Search recipes
