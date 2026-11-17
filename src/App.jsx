@@ -11,7 +11,7 @@ import Dialogue from "./components/Dialogue";
 function App() {
     const [foodData, setFoodData] = useState([]);
     const [foodId, setFoodId] = useState("656329");
-    const [darkMode, setDarkMode] = useState(false);
+    const [theme, setTheme] = useState("light");
     const [apiError, setApiError] = useState(false);
 
     const foodDetailsRef = useRef(null);
@@ -22,27 +22,28 @@ function App() {
         }
     };
 
+    const toggleTheme = () => {
+        setTheme((current) => (current === "dark" ? "light" : "dark"));
+    };
+
     return (
-        <div className={darkMode ? "App" : "darkDisplay"}>
+        <div className={theme === "dark" ? "theme-dark" : ""}>
             {apiError ? (
                 <div className="dialogueOverlay">
                     <Dialogue />
                 </div>
             ) : (
                 <>
-                    <Nav darkMode={darkMode} setDarkMode={setDarkMode} />
+                    <Nav theme={theme} onToggleTheme={toggleTheme} />
                     <Search
                         setApiError={setApiError}
-                        foodData={foodData}
                         setFoodData={setFoodData}
-                        darkMode={darkMode}
                     />
                     <Container>
                         <InnerContainer>
                             <FoodList
                                 setFoodId={setFoodId}
                                 foodData={foodData}
-                                darkMode={darkMode}
                                 scrollToFoodDetails={scrollToFoodDetails}
                             />
                         </InnerContainer>
@@ -51,7 +52,6 @@ function App() {
                                 <FoodDetails
                                     setApiError={setApiError}
                                     foodId={foodId}
-                                    darkMode={darkMode}
                                 />
                             </div>
                         </InnerContainer>

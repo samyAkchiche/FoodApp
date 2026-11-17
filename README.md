@@ -77,11 +77,28 @@ or, if you're using yarn:
   yarn install
 ```
 
+* Add your Spoonacular API key to a `.env` file. The key stays server-side: in development the Vite dev server proxies `/api/spoonacular/*` and adds the key, and in production the Netlify function does the same (`netlify/functions/spoonacular.js`). It is never included in the browser bundle.
+
+```bash
+  cp .env.example .env
+  # then set SPOONACULAR_API_KEY=your_key_here
+```
+
 * Open the URL displayed in your console using your web browser.:
 
 ```bash
   npm run dev
 ```
+
+## Deployment 📦
+
+The app is set up for Netlify (`netlify.toml`), which builds `npm run build`, serves `dist`, and routes `/api/spoonacular/*` to the proxy function. Add your key as an environment variable in **Site settings → Environment variables**:
+
+| Variable                | Description                      |
+| :---------------------- | :------------------------------- |
+| `SPOONACULAR_API_KEY`   | Your Spoonacular API key (required) |
+
+> The variable must **not** be prefixed with `VITE_`. Anything named `VITE_*` is inlined into the client bundle and would expose the key again.
 
 ## Contributing
 

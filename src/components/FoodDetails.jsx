@@ -1,43 +1,35 @@
 import { useEffect, useState } from "react";
+import { getRecipeInformation, isAbortError } from "../api/spoonacular";
 import styles from "./fooddetails.module.css";
 import IngredientsList from "./IngredientsList";
 
-export default function FoodDetails({ foodId, darkMode, setApiError }) {
+export default function FoodDetails({ foodId, setApiError }) {
     const [food, setFood] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const URL = `https://api.spoonacular.com/recipes/${foodId}/information`;
-    const API_KEY = "59232dbb62804c6d8a4a6c068fc03a8a";
 
     useEffect(() => {
-        async function fetchFood() {
-            try {
-                const res = await fetch(`${URL}?apiKey=${API_KEY}`);
-                if (!res.ok) {
-                    throw new Error(
-                        `API Error: ${res.status} ${res.statusText}`
-                    );
-                }
-                const data = await res.json();
-                console.log(data);
+        const controller = new AbortController();
+        setIsLoading(true);
+
+        getRecipeInformation(foodId, controller.signal)
+            .then((data) => {
                 setFood(data);
-            } catch (err) {
-                console.log("Error fetching food details:", err);
-                setApiError(true);
-            } finally {
                 setIsLoading(false);
-            }
-        }
-        fetchFood();
-    }, [foodId]);
+            })
+            .catch((error) => {
+                if (isAbortError(error)) {
+                    return;
+                }
+                console.log("Error fetching food details:", error);
+                setApiError(true);
+                setIsLoading(false);
+            });
+
+        return () => controller.abort();
+    }, [foodId, setApiError]);
 
     return (
-        <div
-            className={styles.recipeCard}
-            style={{
-                color: !darkMode ? "#fff" : "",
-                backgroundColor: !darkMode ? "#282828" : "",
-            }}
-        >
+        <div className={styles.recipeCard}>
             <div>
                 <h1 className={styles.recipeName}>{food.title}</h1>
                 <img
@@ -87,5 +79,4 @@ export default function FoodDetails({ foodId, darkMode, setApiError }) {
             </div>
         </div>
     );
-    console.log(food);
 }

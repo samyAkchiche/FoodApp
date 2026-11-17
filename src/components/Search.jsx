@@ -1,49 +1,45 @@
 import { useEffect, useState } from "react";
+import { isAbortError, searchRecipes } from "../api/spoonacular";
 import styles from "./search.module.css";
 
-const URL = "https://api.spoonacular.com/recipes/complexSearch";
-const API_KEY = "59232dbb62804c6d8a4a6c068fc03a8a";
+const DEBOUNCE_MS = 400;
 
-export default function Search({
-    setApiError,
-    foodData,
-    setFoodData,
-    darkMode,
-}) {
+export default function Search({ setApiError, setFoodData }) {
     const [query, setQuery] = useState("pizza");
 
     useEffect(() => {
-        async function fetchFood() {
-            try {
-                setFoodData([]);
+        const controller = new AbortController();
 
-                const res = await fetch(
-                    `${URL}?query=${query}&apiKey=${API_KEY}`
-                );
-                if (!res.ok) {
-                    throw new Error(`Error: ${res.status}`);
-                }
-                const data = await res.json();
-                console.log(data.results);
-                setFoodData(data.results);
+        const timer = setTimeout(async () => {
+            setFoodData([]);
+
+            if (!query.trim()) {
+                return;
+            }
+
+            try {
+                const data = await searchRecipes(query, controller.signal);
+                setFoodData(data.results ?? []);
             } catch (error) {
+                if (isAbortError(error)) {
+                    return;
+                }
                 console.error("Failed to fetch data:", error);
-                setFoodData([]);
                 setApiError(true);
             }
-        }
+        }, DEBOUNCE_MS);
 
-        fetchFood();
-    }, [query, setFoodData]);
+        // Typing again (or unmounting) cancels the pending request.
+        return () => {
+            clearTimeout(timer);
+            controller.abort();
+        };
+    }, [query, setFoodData, setApiError]);
 
     return (
         <div className={styles.searchContainer}>
             <input
                 className={styles.input}
-                style={{
-                    backgroundColor: !darkMode ? "#121212" : "",
-                    color: !darkMode ? "#fff" : "",
-                }}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 type="text"

@@ -1,24 +1,11 @@
 import styles from "./fooditem.module.css";
 
-export default function FoodItem({
-    food,
-    setFoodId,
-    darkMode,
-    scrollToFoodDetails,
-}) {
+export default function FoodItem({ food, setFoodId, scrollToFoodDetails }) {
     return (
-        <div
-            className={styles.itemContainer}
-            style={{ backgroundColor: !darkMode ? "#282828" : "" }}
-        >
+        <div className={styles.itemContainer}>
             <img className={styles.itemImage} src={food.image} alt="" />
             <div className={styles.itemContent}>
-                <p
-                    className={styles.itemName}
-                    style={{ color: !darkMode ? "#fff" : "" }}
-                >
-                    {food.title}
-                </p>
+                <p className={styles.itemName}>{food.title}</p>
             </div>
             <div className={styles.buttonContainer}>
                 <button

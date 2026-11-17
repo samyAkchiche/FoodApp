@@ -8,9 +8,34 @@ body {
     margin: 0;
 }
 
-.darkDisplay {
-    background-color: #121212;
-    color: #fff;
+/* Light theme is the default. Components read every colour from these variables
+   instead of taking a theme prop. */
+:root {
+    --page-bg: #fff;
+    --surface: #fff;
+    --text: #393e46;
+    --text-muted: #919093;
+    --border: #e3e4dc;
+    --nav-bg: #fff;
+    --nav-text: #393e46;
+    --toggle-bg: #efefef;
+    --icon: #101425;
+}
+
+/* Applied to the app root when the theme is dark: it only remaps variables, so
+   nothing downstream needs to know a theme exists. */
+.theme-dark {
+    --page-bg: #121212;
+    --surface: #282828;
+    --text: #fff;
+    --border: #3f3f3f;
+    --nav-bg: #212121;
+    --nav-text: #fff;
+    --toggle-bg: #3f3f3f;
+    --icon: #e8e9ed;
+
+    background-color: var(--page-bg);
+    color: var(--text);
 }
 
 .dialogueOverlay {
