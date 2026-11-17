@@ -1,5 +1,6 @@
 .itemContainer {
     max-width: 18.8rem;
+    background-color: var(--surface);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgb(0, 0, 0, 0.1);
     margin: 20px;
@@ -20,7 +21,7 @@
 .itemName {
     font-size: 1em;
     font-weight: 600;
-    color: #393e46;
+    color: var(--text);
 }
 
 .itemButton {

@@ -2,7 +2,8 @@
     font-size: 2em;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    color: #393e46;
+    color: var(--nav-text);
+    background-color: var(--nav-bg);
     padding: 30px;
     box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.5);
 }
@@ -16,5 +17,7 @@
     width: 2.5rem;
     border: none;
     border-radius: 100%;
+    background-color: var(--toggle-bg);
+    color: var(--icon);
     cursor: pointer;
 }
